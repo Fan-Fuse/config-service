@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package config;
+
+option go_package = "proto/";
+
+import "google/protobuf/empty.proto";
+
+service ConfigService {
+    // SetKey sets a key in the configuration store.
+    rpc SetKey(SetKeyRequest) returns (SetKeyResponse) {}
+    // GetKey gets a key from the configuration store.
+    rpc GetKey(GetKeyRequest) returns (GetKeyResponse) {}
+    // GetKeys gets all keys from the configuration store.
+    rpc GetKeys(google.protobuf.Empty) returns (GetKeysResponse) {}
+    // Subscribe subscribes to changes for specific keys in the configuration store.
+    rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse) {}
+}
+
+message SetKeyRequest {
+    string key = 1;
+    string value = 2;
+}
+
+message SetKeyResponse {
+    string key = 1;
+    string value = 2;
+}
+
+message GetKeyRequest {
+    string key = 1;
+}
+
+message GetKeyResponse {
+    string key = 1;
+    string value = 2;
+}
+
+message GetKeysResponse {
+    map<string, string> keys = 1;
+}
+
+message SubscribeRequest {
+    repeated string keys = 1;
+}
+
+message SubscribeResponse {
+    string key = 1;
+    string value = 2;
+}

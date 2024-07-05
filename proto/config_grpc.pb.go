@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ConfigServiceClient interface {
 	// SetKey sets a key in the configuration store.
-	SetKey(ctx context.Context, in *SetKeyRequest, opts ...grpc.CallOption) (*SetKeyResponse, error)
+	SetKey(ctx context.Context, in *SetKeyRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	// GetKey gets a key from the configuration store.
 	GetKey(ctx context.Context, in *GetKeyRequest, opts ...grpc.CallOption) (*GetKeyResponse, error)
 	// GetKeys gets all keys from the configuration store.
@@ -41,8 +41,8 @@ func NewConfigServiceClient(cc grpc.ClientConnInterface) ConfigServiceClient {
 	return &configServiceClient{cc}
 }
 
-func (c *configServiceClient) SetKey(ctx context.Context, in *SetKeyRequest, opts ...grpc.CallOption) (*SetKeyResponse, error) {
-	out := new(SetKeyResponse)
+func (c *configServiceClient) SetKey(ctx context.Context, in *SetKeyRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/config.ConfigService/SetKey", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -105,7 +105,7 @@ func (x *configServiceSubscribeClient) Recv() (*SubscribeResponse, error) {
 // for forward compatibility
 type ConfigServiceServer interface {
 	// SetKey sets a key in the configuration store.
-	SetKey(context.Context, *SetKeyRequest) (*SetKeyResponse, error)
+	SetKey(context.Context, *SetKeyRequest) (*empty.Empty, error)
 	// GetKey gets a key from the configuration store.
 	GetKey(context.Context, *GetKeyRequest) (*GetKeyResponse, error)
 	// GetKeys gets all keys from the configuration store.
@@ -119,7 +119,7 @@ type ConfigServiceServer interface {
 type UnimplementedConfigServiceServer struct {
 }
 
-func (UnimplementedConfigServiceServer) SetKey(context.Context, *SetKeyRequest) (*SetKeyResponse, error) {
+func (UnimplementedConfigServiceServer) SetKey(context.Context, *SetKeyRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetKey not implemented")
 }
 func (UnimplementedConfigServiceServer) GetKey(context.Context, *GetKeyRequest) (*GetKeyResponse, error) {

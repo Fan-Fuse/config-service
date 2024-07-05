@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service ConfigService {
     // SetKey sets a key in the configuration store.
-    rpc SetKey(SetKeyRequest) returns (SetKeyResponse) {}
+    rpc SetKey(SetKeyRequest) returns (google.protobuf.Empty) {}
     // GetKey gets a key from the configuration store.
     rpc GetKey(GetKeyRequest) returns (GetKeyResponse) {}
     // GetKeys gets all keys from the configuration store.

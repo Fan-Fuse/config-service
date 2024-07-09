@@ -10,5 +10,5 @@ var AllowedKeys = map[string]interface{}{
 	"CRAWLER_ENABLED":         true,
 	"CRAWLER_INTERVAL_ARTIST": 43200, // in seconds, per artist, default 12 hours
 	"CRAWLER_INTERVAL_USER":   86400, // in seconds, per user, default 24 hours
-	"CRAWLER_BATCH_SIZE":      10,    // number of artists that can be queued to crawl at once
+	"CRAWLER_BATCH_SIZE":      10,    // number of artists/users that the services responsible for returning "Updateablles" should return
 }
